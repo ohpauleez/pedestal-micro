@@ -1,10 +1,63 @@
-/target
-/classes
-/checkouts
-/logs
+# Project related
+
+# Java related
 pom.xml
 pom.xml.asc
-*.jar
+*jar
 *.class
-/.lein-*
-/.nrepl-port
+
+# Leiningen
+classes/
+lib/
+native/
+checkouts/
+target/
+.lein-*
+repl-port
+.nrepl-port
+.repl
+
+# Datomic
+*.db
+
+# Python
+*.pyc
+*.pyo
+/__pycache__/
+
+# Ruby
+#Gemfile.lock
+#.sass-cache/
+
+# Temp Files
+*.orig
+*~
+.*.swp
+.*.swo
+*.tmp
+*.bak
+
+# Editors (IntelliJ / Eclipse)
+*/.idea
+.idea
+*/.classpath
+.classpath
+*/.project
+.project
+*/.settings
+.settings
+
+# OS X
+.DS_Store
+
+# Logging
+*.log
+/logs/
+
+# Docs
+autodoc/
+
+# Builds
+out/
+build/
+
