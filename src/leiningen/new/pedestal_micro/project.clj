@@ -30,15 +30,15 @@
                  [org.slf4j/log4j-over-slf4j "1.7.12"]]
   :min-lein-version "2.0.0"
   :resource-paths ["resources" "config"]
-  :aot [{{namespace}}]
-  :main {{namespace}}
+  :main ^{:skip-aot true} {{namespace}}
   ;:java-source-paths ["java"]
   ;:javac-options ["-target" "1.8" "-source" "1.8"]
   :global-vars  {*warn-on-reflection* true
                  *unchecked-math* :warn-on-boxed
                  *assert* true}
   :pedantic? :abort
-  :profiles {:dev {:aliases {}
+  :profiles {:uberjar {:aot [{{namespace}}]}
+             :dev {:aliases {"dumbrepl" ["trampoline" "run" "-m" "clojure.main/main"]}
                    :dependencies [[criterium "0.4.3"]
                                   [thunknyc/profile "0.5.2"]
                                   [org.clojure/tools.trace "0.7.8"]

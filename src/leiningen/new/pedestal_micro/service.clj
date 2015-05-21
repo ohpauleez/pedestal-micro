@@ -4,7 +4,8 @@
             [ns-tracker.core :refer [ns-tracker]]
             [environ.core :refer [env]]
             [{{namespace}}.routes :refer [routes]]
-            [{{namespace}}.db :as db]))
+            [{{namespace}}.db :as db])
+  (:gen-class))
 
 (defonce modified-namespaces
   (if (env :prod)
@@ -22,22 +23,24 @@
                      (require ns-sym :reload))
                    routes)})
 
-(defonce server nil)
+(defn server [service-overrides]
+  (http/create-server (merge service
+                             service-overrides)))
 
 (defn start [& args]
   (db/bootstrap! db/uri)
-  (let [service-overrides (apply hash-map args)]
-    (alter-var-root #'server (fn [_] (http/create-server (merge service
-                                                                service-overrides))))
-    (http/start server)))
+  (let [service-overrides (apply hash-map args)
+        server (server service-overrides)]
+    (http/start server)
+    server))
 
-(defn stop []
-  (http/stop server)
-  (alter-var-root #'server (constantly nil)))
+(defn stop [serv]
+  (http/stop serv)
+  serv)
 
-(defn restart []
-  (stop)
-  (start))
+(defn restart [serv]
+  (http/start (stop serv))
+  serv)
 
 (defn -main [& args]
   (start ::http/join? true
