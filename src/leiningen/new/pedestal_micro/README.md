@@ -32,6 +32,22 @@ $ boot build
 $ sudo docker build .
 ```
 
+## Building and Running an OSv image
+
+This requires [Capstan](https://github.com/cloudius-systems/capstan) to be installed.
+
+``sh
+# With Leiningen
+$ lein uberjar
+
+# With Boot
+$ boot build
+
+$ capstan run [any options you want]
+``
+
+You can also modify your `Capstanfile` to perform the build step for you.
+
 ## Template Notes
 
 See the
