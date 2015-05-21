@@ -42,7 +42,9 @@
                                   [org.clojure/tools.trace "0.7.8"]
                                   [org.clojure/tools.namespace "0.2.10"]
                                   [org.clojure/test.check "0.8.0-ALPHA"]]}}
-  :plugins [[lein-marginalia "0.8.0" :exclusions [[org.clojure/clojure]]]
+  :plugins [[lein-marginalia "0.8.0" :exclusions [[org.clojure/clojure]
+                                                  ;; Use the tools.reader from `cljfmt`
+                                                  [org.clojure/tools.reader]]]
             [codox "0.8.12" :exclusions [[org.clojure/clojure]]]
             ;; Requires lein 2.5.0 or higher
             [lein-cljfmt "0.1.10" :exclusions [[org.clojure/clojure]]]]
