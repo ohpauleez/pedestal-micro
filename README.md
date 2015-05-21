@@ -40,7 +40,7 @@ $ sudo docker build .
 
 This requires [Capstan](https://github.com/cloudius-systems/capstan) to be installed.
 
-``sh
+```sh
 # With Leiningen
 $ lein uberjar
 
@@ -48,7 +48,7 @@ $ lein uberjar
 $ boot build
 
 $ capstan run [any options you want]
-``
+```
 
 You can also modify your `Capstanfile` to perform the build step for you.
 
