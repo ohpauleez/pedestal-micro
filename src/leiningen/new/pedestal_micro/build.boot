@@ -8,14 +8,16 @@
                                                                                [com.cognitect/transit-clj]]]
                             [io.pedestal/pedestal.jetty "0.4.0"]
                             [com.cognitect/transit-clj "0.8.271"]
+                            [com.fasterxml.jackson.core/jackson-annotations "2.3.0"]
 
                             [ns-tracker "0.2.2"]
                             [environ "1.0.0"]
 
                             ;; Datomic
-                            [com.datomic/datomic-free "0.9.5173" :exclusions [joda-time
-                                                                              org.slf4j/slf4j-nop
-                                                                              org.slf4j/slf4j-log4j12]]
+                            [com.datomic/datomic-free "0.9.5173" :exclusions [[joda-time]
+                                                                              [org.slf4j/slf4j-nop]
+                                                                              [org.slf4j/slf4j-log4j12]
+                                                                              [com.fasterxml.jackson.core/jackson-annotations]]]
                             [io.rkn/conformity "0.3.4" :exclusions [com.datomic/datomic-free]]
 
                             ;; Logging
