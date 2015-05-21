@@ -24,6 +24,7 @@
                  ;; Logging
                  [org.slf4j/slf4j-api "1.7.12"]
                  [ch.qos.logback/logback-classic "1.1.3" :exclusions [[org.slf4j/slf4j-api]]]
+                 ;; Chronicle Logger can't run on OSv - comment it out here and in logback.xml
                  [net.openhft/chronicle-logger-logback "1.1.0" :exclusions [[org.slf4j/slf4j-api]]]
                  [org.slf4j/jul-to-slf4j "1.7.12"]
                  [org.slf4j/jcl-over-slf4j "1.7.12"]
