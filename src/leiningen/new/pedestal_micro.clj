@@ -24,6 +24,9 @@
              ["src/{{sanitized}}.clj" (render "service.clj" data)]
              ["src/{{sanitized}}/routes.clj" (render "routes.clj" data)]
              ["src/{{sanitized}}/db.clj" (render "db.clj" data)]
+             ["src/{{sanitized}}/util.clj" (render "util.clj" data)]
+             ["src/{{sanitized}}/config.clj" (render "config.clj" data)]
              ["test/{{sanitized}}_test.clj" (render "service_test.clj" data)]
              ["test/{{sanitized}}/test_helpers.clj" (render "test_helpers.clj" data)]
-             ["resources/logback.xml" (render "logback.xml" data)])))
+             ["config/logback.xml" (render "logback.xml" data)]
+             ["config/system.edn" (render "system.edn" data)])))

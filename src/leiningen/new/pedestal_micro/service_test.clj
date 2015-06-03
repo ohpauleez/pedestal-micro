@@ -9,7 +9,7 @@
        "Hello, World!"))
   (is (=
        (:headers (response-for (test-service) :get "/"))
-       {"Content-Type" "text/html;charset=UTF-8"
+       {"Content-Type" "text/plain"
         "Strict-Transport-Security" "max-age=31536000; includeSubdomains"
         "X-Frame-Options" "DENY"
         "X-Content-Type-Options" "nosniff"

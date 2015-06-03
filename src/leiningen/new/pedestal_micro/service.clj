@@ -2,33 +2,46 @@
   (:require [io.pedestal.http :as http]
             [io.pedestal.http.route.definition :refer [defroutes]]
             [ns-tracker.core :refer [ns-tracker]]
-            [environ.core :refer [env]]
+            [{{namespace}}.config :refer [config]]
+            [{{namespace}}.util :as util]
             [{{namespace}}.routes :refer [routes]]
             [{{namespace}}.db :as db])
   (:gen-class))
 
+(def config-map (util/edn-resource "system.edn"))
+
+(defn conf
+  ([k]
+  (config config-map k))
+  ([k not-found]
+   (config config-map k not-found)))
+
 (defonce modified-namespaces
-  (if (env :prod)
+  (if (conf :prod)
     (constantly nil)
     (ns-tracker ["src"])))
 
+(defonce datomic-uri (conf :datomic-uri (db/new-db-uri)))
+
 (def service
-  {::http/host (or (env :host) "0.0.0.0")
-   ::http/port (Integer/parseInt (or (env :port) "8080"))
+  {::http/host (or (conf :host) "127.0.0.1")
+   ::http/port (Integer/parseInt (or (conf :port) "8080"))
    ::http/type :jetty
    ::http/join? false
    ::http/resource-path "/public"
-   ::http/routes (fn []
-                   (doseq [ns-sym (modified-namespaces)]
-                     (require ns-sym :reload))
-                   routes)})
+   ::http/routes (if (conf :prod)
+                   routes
+                   (fn []
+                     (doseq [ns-sym (modified-namespaces)]
+                       (require ns-sym :reload))
+                     (deref #'routes)))})
 
 (defn server [service-overrides]
   (http/create-server (merge service
                              service-overrides)))
 
 (defn start [& args]
-  (db/bootstrap! db/uri)
+  (db/bootstrap! datomic-uri)
   (let [service-overrides (apply hash-map args)
         server (server service-overrides)]
     (http/start server)
