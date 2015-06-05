@@ -52,9 +52,3 @@ $ capstan run [any options you want]
 
 You can also modify your `Capstanfile` to perform the build step for you.
 
-## What's next?
-
-* Scripts for building, tagging and deploying Docker containers (this includes
-  automatically building an uberjar).
-* Better [12 Factor App](http://12factor.net/logs) logging support (currently
-  only supervisord prints to STDOUT).
