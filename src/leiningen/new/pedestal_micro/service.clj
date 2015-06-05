@@ -44,16 +44,17 @@
   (db/bootstrap! datomic-uri)
   (let [service-overrides (apply hash-map args)
         server (server service-overrides)]
-    (http/start server)
-    server))
+    (http/start server)))
 
 (defn stop [serv]
-  (http/stop serv)
-  serv)
+  (if serv
+    (http/stop serv)
+    serv))
 
 (defn restart [serv]
-  (http/start (stop serv))
-  serv)
+  (if serv
+    (http/start (stop serv))
+    serv))
 
 (defn -main [& args]
   (start ::http/join? true
