@@ -2,6 +2,17 @@
 
 A Leiningen template for building micro-services in Pedestal.
 
+## Installing this fork
+
+```sh
+$ git clone git@github.com:ohpauleez/pedestal-micro.git
+$ cd pedestal-micro
+$ lein install
+```
+
+Update your `~/.lein/profiles.clj` to include `[pedestal-micro/lein-template "0.3.0-Pd"]`
+within your `{:user {:plugins [...]}}` section.
+
 ## Creating a project
 
 ```sh
