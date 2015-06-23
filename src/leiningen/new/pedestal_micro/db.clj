@@ -1,7 +1,6 @@
 (ns {{namespace}}.db
-  "Datomic bootstrap and Datomic + Pedestal interceptor"
+  "Datomic bootstrap"
   (:require [datomic.api :as d]
-            [io.pedestal.interceptor :refer [interceptor]]
             [io.rkn.conformity :as c]))
 
 (defn new-db-uri []
@@ -20,15 +19,4 @@
     (doseq [rsc [ ]]
       (let [norms (c/load-schema-rsc rsc)]
         (c/ensure-conforms conn norms)))))
-
-(defn insert-datomic
-  "Provide a Datomic conn and db in all incoming requests"
-  [uri]
-  (interceptor
-    {:name ::insert-datomic
-     :enter (fn [context]
-              (let [conn (d/connect uri)]
-                (-> context
-                    (assoc-in [:request :conn] conn)
-                    (assoc-in [:request :db] (d/db conn)))))}))
 
