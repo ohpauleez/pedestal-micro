@@ -1,7 +1,7 @@
 (ns {{namespace}}.util
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
-            [clojure.string :as cstr]
+            [clojure.string :as string]
             [cheshire.core :as json]
             [cognitect.transit :as transit])
   (:import (java.io ByteArrayInputStream
@@ -70,8 +70,8 @@
   ([file-path fallback-path]
    (edn-resource file-path fallback-path io/resource))
   ([file-path fallback-path process-path-fn]
-   (let [trimmed-path (or (not-empty (cstr/trim file-path))
-                          (not-empty (cstr/trim fallback-path)))
+   (let [trimmed-path (or (not-empty (string/trim file-path))
+                          (not-empty (string/trim fallback-path)))
          contents (some->>
                     trimmed-path
                     process-path-fn

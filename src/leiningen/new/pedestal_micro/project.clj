@@ -2,7 +2,7 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "All Rights Reserved"}
-  :dependencies [[org.clojure/clojure "1.7.0-beta3"]
+  :dependencies [[org.clojure/clojure "1.7.0-RC2"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha" :exclusions [[org.clojure/tools.analyzer.jvm]]]
 
                  [io.pedestal/pedestal.service "0.4.0" :exclusions [[org.slf4j/slf4j-api]
@@ -44,7 +44,7 @@
                                   [thunknyc/profile "0.5.2"]
                                   [org.clojure/tools.trace "0.7.8"]
                                   [org.clojure/tools.namespace "0.2.10"]
-                                  [org.clojure/test.check "0.8.0-ALPHA"]]}}
+                                  [org.clojure/test.check "0.8.0-alpha3"]]}}
   :plugins [[lein-marginalia "0.8.0" :exclusions [[org.clojure/clojure]
                                                   ;; Use the tools.reader from `cljfmt`
                                                   [org.clojure/tools.reader]]]
@@ -53,7 +53,10 @@
             [lein-cljfmt "0.1.10" :exclusions [[org.clojure/clojure]]]]
   :jvm-opts ^:replace ["-d64" "-server"
                        "-Xms1g" ;"-Xmx1g"
+                       "-XX:+UnlockCommercialFeatures" ;"-XX:+FlightRecorder"
                        "-XX:+UseG1GC"
                        ;"-XX:+UseConcMarkSweepGC" "-XX:+UseParNewGC" "-XX:+CMSParallelRemarkEnabled"
-                       "-XX:+UseCompressedOops"
-                       "-XX:+ExplicitGCInvokesConcurrent"])
+                       ;"-XX:+ExplicitGCInvokesConcurrent"
+                       "-XX:+AggressiveOpts"
+                       ;-XX:+UseLargePages
+                       "-XX:+UseCompressedOops"])
