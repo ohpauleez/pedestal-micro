@@ -81,15 +81,15 @@
 (deftask build
   "Build my project."
   []
-  (comp (aot :namespace '#{ {{namespace}} })
+  (comp (aot :namespace '#{ {{namespace}}.service })
         (pom)
         (uber)
-        (jar :main '{{namespace}})))
+        (jar :main '{{namespace}}.service)))
 
-(require '[{{namespace}} :as {{namespace}}])
+(require '{{namespace}}.service)
 
 (deftask server
   "Run a web server"
   []
-  ({{namespace}}/start :io.pedestal.http/join? true))
+  ({{namespace}}.service/start :io.pedestal.http/join? true))
 

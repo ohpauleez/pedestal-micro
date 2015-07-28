@@ -21,7 +21,7 @@
              [".gitignore" (render ".gitignore" data)]
              ["Dockerfile" (render "Dockerfile" data)]
              ["Capstanfile" (render "Capstanfile" data)]
-             ["src/{{sanitized}}.clj" (render "service.clj" data)]
+             ["src/{{sanitized}}/service.clj" (render "service.clj" data)]
              ["src/{{sanitized}}/routes.clj" (render "routes.clj" data)]
              ["src/{{sanitized}}/interceptor.clj" (render "interceptor.clj" data)]
              ["src/{{sanitized}}/db.clj" (render "db.clj" data)]

@@ -3,7 +3,7 @@
             [io.pedestal.http :as http]
             [io.pedestal.test :refer [response-for]]
             [cheshire.core :as json]
-            [{{namespace}}]
+            [{{namespace}}.service :as {{namespace}}]
             [{{namespace}}.db :as db]
             [{{namespace}}.util :as util]))
 

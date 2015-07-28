@@ -31,14 +31,15 @@
                  [org.slf4j/log4j-over-slf4j "1.7.12"]]
   :min-lein-version "2.0.0"
   :resource-paths ["resources" "config"]
-  :main ^{:skip-aot true} {{namespace}}
+  :main ^{:skip-aot true} {{namespace}}.service
   ;:java-source-paths ["java"]
   ;:javac-options ["-target" "1.8" "-source" "1.8"]
   :global-vars  {*warn-on-reflection* true
                  *unchecked-math* :warn-on-boxed
+                 ;*compiler-options* {:disable-locals-clearing true}
                  *assert* true}
   :pedantic? :abort
-  :profiles {:uberjar {:aot [{{namespace}}]}
+  :profiles {:uberjar {:aot [{{namespace}}.service]}
              :dev {:aliases {"dumbrepl" ["trampoline" "run" "-m" "clojure.main/main"]}
                    :dependencies [[criterium "0.4.3"]
                                   [thunknyc/profile "0.5.2"]
@@ -54,6 +55,7 @@
   :jvm-opts ^:replace ["-d64" "-server"
                        "-Xms1g" ;"-Xmx1g"
                        "-XX:+UnlockCommercialFeatures" ;"-XX:+FlightRecorder"
+                       ;"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8030"
                        "-XX:+UseG1GC"
                        ;"-XX:+UseConcMarkSweepGC" "-XX:+UseParNewGC" "-XX:+CMSParallelRemarkEnabled"
                        ;"-XX:+ExplicitGCInvokesConcurrent"

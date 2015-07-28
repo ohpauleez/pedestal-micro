@@ -1,4 +1,4 @@
-(ns {{namespace}}
+(ns {{namespace}}.service
   (:require [io.pedestal.http :as http]
             [io.pedestal.http.route.definition :refer [defroutes]]
             [ns-tracker.core :refer [ns-tracker]]
