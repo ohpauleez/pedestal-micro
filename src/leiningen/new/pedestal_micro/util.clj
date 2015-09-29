@@ -48,7 +48,7 @@
   ([matcher]
    (loop [res (transient [])]
      (if-let [found (re-find matcher)]
-       (recur (conj res found))
+       (recur (conj! res found))
        (persistent! res))))
   ([regex s]
    (re-findall (re-matcher regex s))))
