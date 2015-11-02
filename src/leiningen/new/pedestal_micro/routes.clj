@@ -10,4 +10,5 @@
 
 (defroutes routes
   [[["/" {:get hello-world}
-     ^:interceptors [interceptor/insert-datomic]]]])
+     ;^:interceptors [(interceptor/insert-datomic some-datomic-uri)]
+     ]]])
