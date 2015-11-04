@@ -5,23 +5,17 @@
             [{{namespace}}.config :refer [config]]
             [{{namespace}}.util :as util]
             [{{namespace}}.routes :refer [routes]]
-            [{{namespace}}.db :as db])
+            [{{namespace}}.db :as db]
+            [{{namespace}}.bootstrap :refer [conf]])
   (:gen-class))
 
-(def config-map (util/edn-resource "system.edn"))
-
-(defn conf
-  ([k]
-  (config config-map k))
-  ([k not-found]
-   (config config-map k not-found)))
 
 (defonce modified-namespaces
   (if (conf :prod)
     (constantly nil)
     (ns-tracker ["src"])))
 
-(defonce datomic-uri (conf :datomic-uri (db/new-db-uri)))
+(defonce datomic-uri (conf :datomic-uri))
 
 (def service
   {::http/host (or (conf :host) "127.0.0.1")
@@ -59,3 +53,4 @@
 (defn -main [& args]
   (start ::http/join? true
          ::http/routes routes))
+

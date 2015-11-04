@@ -27,6 +27,7 @@
              ["src/{{sanitized}}/db.clj" (render "db.clj" data)]
              ["src/{{sanitized}}/util.clj" (render "util.clj" data)]
              ["src/{{sanitized}}/config.clj" (render "config.clj" data)]
+             ["src/{{sanitized}}/bootstrap.clj" (render "bootstrap.clj" data)]
              ["test/{{sanitized}}_test.clj" (render "service_test.clj" data)]
              ["test/{{sanitized}}/test_helpers.clj" (render "test_helpers.clj" data)]
              ["config/logback.xml" (render "logback.xml" data)]

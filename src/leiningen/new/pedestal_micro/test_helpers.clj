@@ -5,31 +5,35 @@
             [cheshire.core :as json]
             [{{namespace}}.service :as {{namespace}}]
             [{{namespace}}.db :as db]
-            [{{namespace}}.util :as util]))
+            [{{namespace}}.util :as util]
+            [{{namespace}}.bootstrap :as bootstrap]))
 
-(def base-service-map {{namespace}}/service)
+(def base-service-map (with-redefs [bootstrap/config-map (let [sys-map (util/edn-resource "system.edn")]
+                                                            (assoc sys-map :datomic-uri (db/new-db-uri)))]
+                        (require '[{{namespace}}.service :as {{namespace}}] :reload)
+                        (require '[{{namespace}}.routes :as routes] :reload)
+                        (assoc {{namespace}}/service
+                               ::datomic-uri (bootstrap/conf :datomic-uri))))
 
 (defn service-fn [serv-map]
   (::http/service-fn (http/create-servlet serv-map)))
+
+(defn make-service
+  ([]
+   (make-service base-service-map))
+  ([serv-map]
+   (service-fn serv-map)))
 
 (defn service
   "This generates a testable service for use with io.pedestal.test/response-for."
   ([]
    (service base-service-map))
   ([serv-map]
-   (service-fn serv-map)))
-
-(defn test-service
-  "Return a service-fn for use with Pedestal's `response-for` test helper."
-  ([]
-   (db/bootstrap! {{namespace}}/datomic-uri)
-   (service))
-  ([serv-map]
-   (db/bootstrap! {{namespace}}/datomic-uri)
-   (service serv-map))
+   (service serv-map (::datomic-uri serv-map
+                                    (bootstrap/conf :datomic-uri))))
   ([serv-map datomic-uri]
    (db/bootstrap! datomic-uri)
-   (service serv-map)))
+   (make-service serv-map)))
 
 (defn GET
   "Make a GET request on our service using response-for."
@@ -91,3 +95,4 @@
   ([tx-data] (with-seeds (d/db (d/connect {{namespace}}/datomic-uri)) tx-data))
   ([db tx-data]
    (:db-after (d/with db tx-data))))
+
