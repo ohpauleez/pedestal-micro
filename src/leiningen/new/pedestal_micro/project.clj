@@ -5,21 +5,21 @@
   :dependencies [[org.clojure/clojure "1.7.0-RC2"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha" :exclusions [[org.clojure/tools.analyzer.jvm]]]
 
-                 [io.pedestal/pedestal.service "0.4.0" :exclusions [[org.slf4j/slf4j-api]
+                 [io.pedestal/pedestal.service "0.4.1" :exclusions [[org.slf4j/slf4j-api]
                                                                     [com.cognitect/transit-clj]]]
-                 [io.pedestal/pedestal.jetty "0.4.0"]
-                 [com.cognitect/transit-clj "0.8.271"]
+                 [io.pedestal/pedestal.jetty "0.4.1"]
+                 [com.cognitect/transit-clj "0.8.285"]
                  [com.fasterxml.jackson.core/jackson-annotations "2.3.0"]
 
                  [ns-tracker "0.2.2"]
                  [environ "1.0.0"]
 
                  ;; Datomic
-                 [com.datomic/datomic-free "0.9.5173" :exclusions [[joda-time]
+                 [com.datomic/datomic-free "0.9.5327" :exclusions [[joda-time]
                                                                    [org.slf4j/slf4j-nop]
                                                                    [org.slf4j/slf4j-log4j12]
                                                                    [com.fasterxml.jackson.core/jackson-annotations]]]
-                 [io.rkn/conformity "0.3.4" :exclusions [com.datomic/datomic-free]]
+                 [io.rkn/conformity "0.3.7" :exclusions [com.datomic/datomic-free]]
 
                  ;; Logging
                  [org.slf4j/slf4j-api "1.7.12"]
