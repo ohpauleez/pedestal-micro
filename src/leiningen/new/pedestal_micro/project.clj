@@ -2,14 +2,13 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "All Rights Reserved"}
-  :dependencies [[org.clojure/clojure "1.7.0-RC2"]
-                 [org.clojure/core.async "0.1.346.0-17112a-alpha" :exclusions [[org.clojure/tools.analyzer.jvm]]]
+  :dependencies [[org.clojure/clojure "1.7.0"]
+                 [org.clojure/core.async "0.2.371"]
 
-                 [io.pedestal/pedestal.service "0.4.1" :exclusions [[org.slf4j/slf4j-api]
-                                                                    [com.cognitect/transit-clj]]]
+                 [io.pedestal/pedestal.service "0.4.1"]
                  [io.pedestal/pedestal.jetty "0.4.1"]
                  [com.cognitect/transit-clj "0.8.285"]
-                 [com.fasterxml.jackson.core/jackson-annotations "2.3.0"]
+                 [com.fasterxml.jackson.core/jackson-annotations "2.3.2"]
 
                  [ns-tracker "0.2.2"]
                  [environ "1.0.0"]
@@ -25,7 +24,7 @@
                  [org.slf4j/slf4j-api "1.7.12"]
                  [ch.qos.logback/logback-classic "1.1.3" :exclusions [[org.slf4j/slf4j-api]]]
                  ;; Chronicle Logger can't run on OSv - comment it out here and in logback.xml
-                 [net.openhft/chronicle-logger-logback "1.1.0" :exclusions [[org.slf4j/slf4j-api]]]
+                 [net.openhft/chronicle-logger-logback "1.1.1" :exclusions [[org.slf4j/slf4j-api]]]
                  [org.slf4j/jul-to-slf4j "1.7.12"]
                  [org.slf4j/jcl-over-slf4j "1.7.12"]
                  [org.slf4j/log4j-over-slf4j "1.7.12"]]
