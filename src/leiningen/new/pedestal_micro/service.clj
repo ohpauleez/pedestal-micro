@@ -15,7 +15,7 @@
     (constantly nil)
     (ns-tracker ["src"])))
 
-(defonce datomic-uri (conf :datomic-uri))
+(defonce datomic-uri (conf :datomic-uri (db/new-db-uri)))
 
 (def service
   {::http/host (or (conf :host) "127.0.0.1")
